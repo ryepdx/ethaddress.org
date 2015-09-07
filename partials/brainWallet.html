@@ -28,11 +28,11 @@
 <div class="row" ng-show="address && private">
   <div class="row single paperwallet front">
     <div class="art col s12">
-      <img src="./images/wallet_front1.png" width="1010px" inline />
+      <img src="./images/wallet_front1.png" width="1010px" />
       <icon-identicon class="identicon" code="{{address}}" size="81"></icon-identicon>
       <qrcode class="address-qr" size="80" data="{{address}}"></qrcode>
       <qrcode class="privatekey-qr" size="133" version="8" ng-if="!hideKey" data="{{private}}"></qrcode>
-      <img class="privatekey-qr red-x" width"133" height="133" ng-if="hideKey" src="./images/red-x.svg" inline />
+      <img class="privatekey-qr red-x" width"133" height="133" ng-if="hideKey" src="./images/red-x.svg" />
       <div class="address-text-box"><span class="address-text">{{address}}</span></div>
       <div class="privatekey-text-box top" ng-if="!hideKey"><span class="privatekey-text">{{private}}</span></div>
       <div class="privatekey-text-box bottom" ng-if="!hideKey"><span class="privatekey-text">{{private}}</span></div>
@@ -41,7 +41,7 @@
   <div class="page-break" ng-if="showFront && showBack" />
   <div class="row single paperwallet back" ng-show="showBack">
     <div class="art col s12">
-      <img src="./images/wallet_back1.png" width="1010px" inline />
+      <img src="./images/wallet_back1.png" width="1010px" />
     </div>
   </div>
 </div>
