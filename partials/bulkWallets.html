@@ -27,10 +27,10 @@
         <button class="btn-large green col s12 row" ng-click="generateWallets()">Generate wallets!</button>
     </div>
     <div class="col m1 s12">
-      <a class="col row s12 small btn-large blue" ng-click="print()"><img src="./images/print.svg" /></a>
+      <a class="col row s12 small btn-large blue print" ng-click="print()"></a>
     </div>
     <div class="col m1 s12">
-      <a class="col row s12 small btn-large blue" ng-click="exportKeys()"><img src="./images/download.svg" /></a>
+      <a class="col row s12 small btn-large blue download" ng-click="exportKeys()"></a>
     </div>
   </div>
   <div class="row csv" ng-if="walletType=='csv'" on-click-select-all>
@@ -38,9 +38,7 @@
   </div>
   <div class="page" ng-repeat="page in getPages()" ng-if="walletType=='paper'">
     <div class="row paperwallet front" ng-repeat="wallet in page">
-      <div class="art col s12">
-        <img src="./images/wallet_front1.png" ng-show="walletArt !== 'none'" />
-        <div class="placeholder" ng-show="walletArt === 'none'"></div>
+      <div class="art col s12" ng-class="{'no-art': walletArt === 'none'}">
         <icon-identicon class="identicon" code="{{wallet.address}}" ng-show="walletArt !== 'none'" size="81"></icon-identicon>
         <qrcode class="address-qr" size="80" data="{{wallet.address}}"></qrcode>
         <qrcode class="privatekey-qr" size="133" version="8" data="{{wallet.private}}"></qrcode>
@@ -51,9 +49,7 @@
     </div>
     <div class="page-break" ng-if="showBack && walletArt !== 'none'" />
     <div class="row paperwallet back" ng-repeat="wallet in page" ng-show="showBack && walletArt !== 'none'">
-      <div class="art col s12">
-        <img src="./images/wallet_back1.png" width="1010px" />
-      </div>
+      <div class="art col s12"></div>
     </div>
     <div class="page-break" ng-if="!$last" />
   </div>

@@ -1,9 +1,9 @@
 <div class="row screen-only">
   <div class="col s12">
-  <p><label for="prefix">Address Prefix</label><input id="prefix" type="text" ng-pattern="/^[a-fA-F0-9]+$/" ng-model="prefix" /></p>
+    <p><label for="prefix">Address Prefix</label><input id="prefix" type="text" ng-pattern="/^[a-fA-F0-9]+$/" ng-model="prefix" /></p>
   </div>
   <div class="col s12">
-  <p><label for="targetHPS">Target Hashes Per Second</label><input type="number" class="validate" ng-model="targetHPS" /></p>
+    <p><label for="targetHPS">Target Hashes Per Second</label><input type="number" class="validate" ng-model="targetHPS" /></p>
   </div>
   <div class="input-field col s12 screen-only">
     <select ng-model="walletType" ng-init="walletType='csv'" material-select>
@@ -22,10 +22,10 @@
     <input id="perPage" type="number" class="validate" ng-model="perPage" />
     <label for="perPage">Wallets per page</label>
   </div>
-  <div class="col s12">
-    <input type="checkbox" ng-model="usePassword" id="usePassword" /><label for="usePassword">Encrypt wallets</label></div>
+  <div class="row col s12">
+    <input type="checkbox" ng-model="usePassword" id="usePassword" /><label for="usePassword">Encrypt wallets</label>
   </div>
-  <div class="col s12" ng-show="usePassword">
+  <div class="row col s12" ng-show="usePassword">
     <label for="password">Password:</label><input type="password" ng-model="password" placeholder="Do not forget this!" />
   </div>
   <div class="col m3 s12">
@@ -33,10 +33,10 @@
     <button class="btn-large red col s12 row" ng-click="stopSearching()" ng-show="searching">Stop Searching!</button>
   </div>
   <div class="col m1 s12">
-    <a class="col row s12 small btn-large blue" ng-click="print()"><img src="./images/print.svg" /></a>
+    <a class="col row s12 small btn-large blue print" ng-click="print()"></a>
   </div>
   <div class="col m1 s12">
-    <a class="col row s12 small btn-large blue" ng-click="exportKeys()"><img src="./images/download.svg" /></a>
+    <a class="col row s12 small btn-large blue download" ng-click="exportKeys()"></a>
   </div>
 </div>
 <div class="row screen-only">
@@ -53,9 +53,7 @@
 </div>
 <div class="page" ng-repeat="page in getPages()" ng-if="walletType=='paper'">
     <div class="row paperwallet front" ng-repeat="wallet in page">
-        <div class="art col s12">
-            <img src="./images/wallet_front1.png" ng-show="walletArt !== 'none'" />
-            <div class="placeholder" ng-show="walletArt === 'none'" />
+        <div class="art col s12" ng-class="{'no-art': walletArt === 'none'}">
             <icon-identicon class="identicon" code="{{wallet.address}}" ng-show="walletArt !== 'none'" size="81"></icon-identicon>
             <qrcode class="address-qr" size="80" data="{{wallet.address}}"></qrcode>
             <qrcode class="privatekey-qr" size="133" version="8" data="{{wallet.private}}"></qrcode>
@@ -66,9 +64,7 @@
     </div>
     <div class="page-break" ng-if="showBack && walletArt !== 'none'" />
     <div class="row paperwallet back" ng-repeat="wallet in page" ng-show="showBack && walletArt !== 'none'">
-        <div class="art col s12">
-            <img src="./images/wallet_back1.png" width="1010px" />
-        </div>
+        <div class="art col s12"></div>
     </div>
     <div class="page-break" ng-if="!$last" />
 </div>

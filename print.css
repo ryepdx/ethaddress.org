@@ -2,9 +2,6 @@ html, body, main, div { margin: 0px !important; padding: 0px !important; width: 
 .screen-only, .drag-target { display: none !important; }
 .page-break { display: block; page-break-before: always; }
 .paperwallet { width: 1010px !important; }
-.paperwallet .art .address-qr { left: 43px; }
-.paperwallet .art .privatekey-qr { left: 823px; }
-.paperwallet .art .identicon { left: 42px; top: 51px; }
 .paperwallet .art .share-identicon { left: 146px; }
 .paperwallet .art .share-info-box { left: 42px; }
 .paperwallet .art .address-text-box { left: 18px; width: auto !important; }

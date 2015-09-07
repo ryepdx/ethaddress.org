@@ -11,15 +11,31 @@
     position: absolute;
 }
 
-.paperwallet .art img,
-.paperwallet .art .placeholder {
+.paperwallet div.art{
   width: 1010px;
   height: 331px;
 }
 
-.paperwallet .art img.red-x {
+.paperwallet.front div.art.no-art,
+.paperwallet.back div.art.no-art {
+  background-image: none;
+}
+
+.paperwallet.front div.art {
+  background: url("./images/wallet_front1.png") no-repeat left 0.75rem top;
+  background-size: 100%;
+}
+
+.paperwallet.back div.art {
+  background: url("./images/wallet_back1.png") no-repeat left 0.75rem top;
+  background-size: 100%;
+}
+
+.paperwallet .art .red-x {
   width: 133px;
   height: 133px;
+  background: url("./images/red-x.svg") no-repeat center center;
+  background-size: 100%;
 }
 
 .paperwallet .art .address-qr {

@@ -5,23 +5,23 @@
       <option value="none">No wallet art</option>
     </select>
   </div>
-  <div class="col s12">
-    <input type="checkbox" ng-model="showBack" ng-init="showBack=true" id="showBack"/><label for="showBack">Show wallet back</label></p>
+  <div class="row col s12">
+    <input type="checkbox" ng-model="showBack" ng-init="showBack=true" id="showBack"/><label for="showBack">Show wallet back</label>
   </div>
-  <div class="col s12">
-    <input type="checkbox" ng-model="usePassword" id="usePassword" /><label for="usePassword">Encrypt wallets</label></div>
+  <div class="row col s12">
+    <input type="checkbox" ng-model="usePassword" id="usePassword" /><label for="usePassword">Encrypt wallets</label>
   </div>
-  <div class="col s12" ng-show="usePassword">
+  <div class="row col s12" ng-show="usePassword">
     <label for="password">Password:</label><input type="password" ng-model="password" placeholder="Do not forget this!" />
   </div>
   <div class="col m3 s12">
       <button class="btn-large green col s12 row" ng-click="generateWallet()">Generate wallet!</button>
   </div>
   <div class="col m1 s12">
-    <a class="col row s12 small btn-large blue" ng-click="print()"><img src="./images/print.svg" /></a>
+    <a class="col row s12 small btn-large blue print" ng-click="print()"></a>
   </div>
   <div class="col m1 s12">
-    <a class="col row s12 small btn-large blue" ng-click="exportKey()"><img src="./images/download.svg" /></a>
+    <a class="col row s12 small btn-large blue download" ng-click="exportKey()"></a>
   </div>
 </div>
 <div class="row screen-only">
@@ -32,9 +32,7 @@
   </div>
 </div>
 <div class="row single paperwallet front">
-  <div class="art col s12">
-    <img src="./images/wallet_front1.png" ng-show="walletArt !== 'none'" />
-    <div class="placeholder" ng-show="walletArt === 'none'"></div>
+  <div class="art col s12" ng-class="{'no-art': walletArt === 'none'}">
     <icon-identicon class="identicon" code="{{wallet.address}}" ng-show="walletArt !== 'none'" size="81"></icon-identicon>
     <qrcode class="address-qr" size="80" data="{{wallet.address}}"></qrcode>
     <qrcode class="privatekey-qr" size="133" version="8" data="{{wallet.private}}"></qrcode>
@@ -45,7 +43,5 @@
 </div>
 <div class="page-break" ng-if="showBack && walletArt !== 'none'" />
 <div class="row single paperwallet back" ng-show="showBack && walletArt !== 'none'">
-  <div class="art col s12">
-    <img src="./images/wallet_back1.png" width="1010px" />
-  </div>
+  <div class="art col s12"></div>
 </div>

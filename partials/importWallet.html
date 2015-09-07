@@ -46,14 +46,12 @@
     </select>
     <p ng-hide="walletArt=='none'"><input type="checkbox" ng-model="showBack" ng-init="showBack=true" id="showBack"/><label for="showBack">Show wallet back</label></p>
     <div class="col m1 s12">
-      <a class="col row s12 small btn-large blue" ng-click="print()"><img src="./images/print.svg" /></a>
+      <a class="col row s12 small btn-large blue print" ng-click="print()"></a>
     </div>
   </div>
   <div ng-show="address">
     <div class="row single paperwallet front">
       <div class="art col s12">
-        <img src="./images/wallet_front1.png" ng-show="walletArt !== 'none'" />
-        <div class="placeholder" ng-show="walletArt === 'none'"></div>
         <icon-identicon class="identicon" code="{{address}}" ng-show="walletArt !== 'none'" size="81"></icon-identicon>
         <qrcode class="address-qr" size="80" data="{{address}}"></qrcode>
         <qrcode class="privatekey-qr" size="133" version="8" data="{{key}}"></qrcode>
@@ -64,9 +62,7 @@
     </div>
     <div class="page-break" ng-if="showBack && walletArt !== 'none'" />
     <div class="row single paperwallet back" ng-show="showBack && walletArt !== 'none'">
-      <div class="art col s12">
-        <img src="./images/wallet_back1.png" width="1010px" />
-      </div>
+      <div class="art col s12"></div>
     </div>
   </div>
 </div>

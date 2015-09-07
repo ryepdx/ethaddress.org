@@ -18,3 +18,13 @@ input.ng-valid.ng-dirty {
 .wallet-info {
   overflow-wrap: break-word;
 }
+
+a.print {
+    background: transparent url("./images/print.svg") no-repeat center center;
+    background-size: 50%;
+}
+
+a.download {
+    background: transparent url("./images/download.svg") no-repeat center center;
+    background-size: 50%;
+}
