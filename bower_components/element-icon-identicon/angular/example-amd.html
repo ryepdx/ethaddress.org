@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html ng-csp="">
+<head>
+  <title>Angular.JS identicon example</title>
+  <meta charset="utf-8" />
+  <script src="../bower_components/requirejs/require.js"></script>
+</head>
+<body>
+  <icon-identicon code="abcd" title="abcd" size="200"></icon-identicon>
+  <random-identicon fn="hash" size="200"></random-identicon>
+  <random-identicon fn="guid" size="200"></random-identicon>
+  <random-identicon fn="sentence" size="200"></random-identicon>
+
+  <script>
+    require.config({
+      paths: {
+        angular: '../bower_components/angular/angular.min',
+        chance: '../bower_components/chance/chance',
+        'icon-identicon': '../angular/icon-identicon',
+        'identicon-canvas': '../lib/identicon-canvas'
+      },
+      shim: {
+        angular: {
+          exports: 'angular'
+        }
+      },
+      enforceDefine: true
+    });
+
+    require(['angular', 'chance', 'icon-identicon'], function (angular, Chance) {
+      var app;
+      app = angular.module('app', ['icon-identicon']);
+
+      app.directive('randomIdenticon', [
+        function () {
+          var chance = new Chance();
+          return {
+            restrict: 'E',
+            replace: false,
+            template: '<icon-identicon code="{{code}}" title="{{title}}" size="{{size}}"></icon-identicon>',
+            scope: {
+              fn: '@',
+              size: '@'
+            },
+            link: function ($scope) {
+              $scope.title = $scope.fn;
+              $scope.code = chance[$scope.fn]();
+            }
+          };
+        }
+      ]);
+
+      angular.bootstrap(document, ['app']);
+    });
+  </script>
+</body>
+</html>

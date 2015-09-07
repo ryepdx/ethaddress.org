@@ -1,0 +1,27 @@
+{
+  "name": "angular-qr-scanner",
+  "version": "0.2.0",
+  "homepage": "https://github.com/sembrestels/angular-qr-scanner",
+  "authors": [
+    "Sem <sembrestels@riseup.net>",
+    "Maxaille <maxaille@hotmail.fr>"
+  ],
+  "description": "QR scanner angular directive",
+  "main": "./qr-scanner.js",
+  "keywords": [
+    "angular",
+    "qr",
+    "qr scanner"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "angular": ">=1.2.0"
+  }
+}

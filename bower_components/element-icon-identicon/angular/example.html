@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html ng-csp="">
+<head>
+  <title>Angular.JS identicon example</title>
+  <meta charset="utf-8" />
+</head>
+<body ng-app="app">
+  <icon-identicon code="abcd" title="abcd" size="200"></icon-identicon>
+  <random-identicon fn="hash" size="200"></random-identicon>
+  <random-identicon fn="guid" size="200"></random-identicon>
+  <random-identicon fn="sentence" size="200"></random-identicon>
+
+  <script src="../bower_components/chance/chance.js"></script>
+  <script src="../bower_components/angular/angular.min.js"></script>
+
+  <script src="../lib/identicon-canvas.js"></script>
+  <script src="icon-identicon.js"></script>
+  <script>
+    var app;
+    app = angular.module('app', ['icon-identicon']);
+
+    app.directive('randomIdenticon', [
+      function () {
+        var chance = new Chance();
+        return {
+          restrict: 'E',
+          replace: false,
+          template: '<icon-identicon code="{{code}}" title="{{title}}" size="{{size}}"></icon-identicon>',
+          scope: {
+            fn: '@',
+            size: '@'
+          },
+          link: function ($scope) {
+            $scope.title = $scope.fn;
+            $scope.code = chance[$scope.fn]();
+          }
+        };
+      }
+    ]);
+
+  </script>
+</body>
+</html>

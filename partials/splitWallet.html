@@ -1,0 +1,97 @@
+<div class="row screen-only">
+  <div class="input-field col s12">
+      <select id="action" ng-model="action" ng-init="action='generate'" material-select>
+          <option value="generate">Generate wallet</option>
+          <option value="derive">Derive wallet from shares</option>
+      </select>
+  </div>
+  <div class="input-field col s12" ng-show="action=='derive'">
+      <textarea ng-model="sharesInput"></textarea>
+  </div>
+  <div class="input-field col s12" ng-show="action=='generate'">
+      <input id="numShares" type="number" class="validate" ng-model="numShares" />
+      <label for="numShares">Number of shares</label>
+  </div>
+  <div class="input-field col s12" ng-show="action=='generate'">
+      <input id="requiredShares" type="number" class="validate" ng-model="requiredShares" />
+      <label for="requiredShares">Number of shares needed to get private key</label>
+  </div>
+  <div class="input-field col s12">
+      <select id="walletType" ng-model="walletType" ng-init="walletType='paper'" material-select>
+          <option value="paper">Paper Wallets</option>
+          <option value="csv">CSV</option>
+      </select>
+  </div>
+  <div class="input-field col s12" ng-show="walletType=='paper' && action=='generate'">
+      <input id="perPage" type="number" class="validate" ng-model="perPage" />
+      <label for="perPage">Shares per page</label>
+  </div>
+  <div class="input-field col s12" ng-show="walletType=='paper'">
+      <select ng-model="walletArt" ng-init="walletArt='earth'" material-select>
+          <option value="earth">Earth</option>
+          <option value="none">No wallet art</option>
+      </select>
+  </div>
+  <div class="col s12" ng-show="walletType=='paper'">
+      <input type="checkbox" ng-model="showBack" ng-init="showBack=true" id="showBack"/><label for="showBack">Show wallet backs</label>
+  </div>
+</div>
+<div class="row screen-only">
+  <div class="col m3 s12">
+    <button class="btn-large green col s12 row" ng-click="generateWallet()" ng-show="action=='generate'">Generate wallet!</button>
+    <button class="btn-large green col s12 row" ng-click="deriveWallet()" ng-show="action=='derive'">Derive wallet!</button>
+  </div>
+  <div class="col m1 s12">
+    <a class="col row s12 small btn-large blue" ng-show="shares.length > 0" ng-click="print()"><img src="./images/print.svg" /></a>
+  </div>
+  <div class="col m1 s12">
+    <a class="col row s12 small btn-large blue" ng-show="shares.length > 0" ng-click="exportKeys()"><img src="./images/download.svg" /></a>
+  </div>
+</div>
+<div class="row csv" ng-if="walletType=='csv'" on-click-select-all>
+    <div ng-repeat="share in shares">{{$index+1}},"{{wallet.address}}","{{share}}"</div>
+</div>
+<div class="page" ng-repeat="page in getPages()" ng-if="walletType=='paper' && action=='generate'">
+  <div class="row paperwallet front" ng-repeat="share in page">
+    <div class="art col s12">
+      <img src="./images/wallet_front1.png" ng-show="walletArt !== 'none'" inline />
+      <div class="placeholder" ng-show="walletArt === 'none'"></div>
+      <icon-identicon class="identicon" code="{{wallet.address}}" ng-show="walletArt !== 'none'" size="81"></icon-identicon>
+      <icon-identicon class="share-identicon" code="{{shareID(share)}}" ng-if="share" ng-show="walletArt !== 'none'" size="81"></icon-identicon>
+      <qrcode class="address-qr" size="80" data="{{wallet.address}}"></qrcode>
+      <div class="share-info-box" size="80"><span class="left">{{requiredSharesStatic}}</span><span class="middle">of</span> <span class="right">{{shares.length-1}}</span></div>
+      <div class="address-text-box"><span class="address-text">{{wallet.address}}</span></div>
+      <qrcode class="privatekey-qr" size="133" version="8" ng-if="share" data="{{share}}"></qrcode>
+      <img class="privatekey-qr red-x" width"133" height="133" ng-if="!share" src="./images/red-x.svg" inline />
+      <div class="privatekey-text-box top small" ng-if="share"><span class="privatekey-text">{{share}}</span></div>
+      <div class="privatekey-text-box bottom small" ng-if="share"><span class="privatekey-text">{{share}}</span></div>
+    </div>
+  </div>
+  <div class="page-break" ng-if="showBack && walletArt !== 'none'" />
+  <div class="row paperwallet back" ng-repeat="wallet in page" ng-show="showBack && walletArt !== 'none'">
+    <div class="art col s12">
+      <img src="./images/wallet_back1.png" width="1010px" inline />
+    </div>
+  </div>
+  <div class="page-break" ng-if="!$last" />
+</div>
+<div ng-if="action=='derive' && derivedWallet">
+  <div class="row paperwallet front">
+    <div class="art col s12">
+      <img src="./images/wallet_front1.png" ng-show="walletArt !== 'none'" inline />
+      <div class="placeholder" ng-show="walletArt === 'none'" />
+      <icon-identicon class="identicon" code="{{derivedWallet.address}}" ng-show="walletArt !== 'none'" size="81"></icon-identicon>
+      <qrcode class="address-qr" size="80" data="{{derivedWallet.address}}"></qrcode>
+      <qrcode class="privatekey-qr" size="133" version="8" data="{{derivedWallet.private}}"></qrcode>
+      <div class="address-text-box"><span class="address-text">{{derivedWallet.address}}</span></div>
+      <div class="privatekey-text-box top"><span class="privatekey-text">{{derivedWallet.private}}</span></div>
+      <div class="privatekey-text-box bottom"><span class="privatekey-text">{{derivedWallet.private}}</span></div>
+    </div>
+  </div>
+  <div class="page-break" ng-if="showBack && walletArt !== 'none'" />
+  <div class="row paperwallet back" ng-show="showBack && walletArt !== 'none'">
+    <div class="art col s12">
+      <img src="./images/wallet_back1.png" width="1010px" inline />
+    </div>
+  </div>
+</div>

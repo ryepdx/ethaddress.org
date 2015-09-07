@@ -24,8 +24,17 @@
     "tests"
   ],
   "dependencies": {
-    "materialize": "*",
+    "jquery": "latest",
+    "angular": "latest",
+    "angular-materialize": "*",
+    "angular-qr-scanner": "https://github.com/maxaille/angular-qr-scanner.git",
     "angular-qrcode": "*",
-    "angular-ui-router": "*"
+    "angular-ui-router": "*",
+    "element-icon-identicon": "*"
+  },
+  "overrides": {
+    "element-icon-identicon": {
+      "main": "angular/icon-identicon.js"
+    }
   }
 }

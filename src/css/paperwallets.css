@@ -1,0 +1,120 @@
+.standalone.page-break { display: none; }
+.paperwallet, .paperwallet .art { width: 1010px; position: relative; margin: 0px; }
+
+.paperwallet .art .address-qr,
+.paperwallet .art .privatekey-qr,
+.paperwallet .art .share-info-box,
+.paperwallet .art .address-text-box, 
+.paperwallet .art .privatekey-text-box, 
+.paperwallet .art .identicon, 
+.paperwallet .art .share-identicon {
+    position: absolute;
+}
+
+.paperwallet .art img,
+.paperwallet .art .placeholder {
+  width: 1010px;
+  height: 331px;
+}
+
+.paperwallet .art img.red-x {
+  width: 133px;
+  height: 133px;
+}
+
+.paperwallet .art .address-qr {
+    top: 157px;
+    left: 55px;
+}
+
+.paperwallet .art .share-info-box {
+    top: 137px;
+    left: 54px;
+    width: 81px;
+    height: 14px;
+    font-size: 10px;
+    background-color: #FFF;
+    line-height: 14px;
+}
+
+.paperwallet .art .share-info-box .left,
+.paperwallet .art .share-info-box .right {
+    width: 32px;
+    display: inline-block:
+}
+
+.paperwallet .art .share-info-box .left {
+    text-align: right;
+}
+
+.paperwallet .art .share-info-box .right {
+    text-align: left;
+}
+
+.paperwallet .art .share-info-box .middle {
+    width: 16px;
+    text-align: center;
+    display: inline-block;
+}
+
+.paperwallet .art .privatekey-qr {
+    top: 97px;
+    left: 834px;
+}
+
+.paperwallet .art .identicon {
+    top: 51px;
+    left: 54px;
+}
+
+.paperwallet .art .share-identicon {
+    top: 51px;
+    left: 158px;
+}
+
+.paperwallet .art .address-text-box, 
+.paperwallet .art .address-text-box, 
+.paperwallet .art .privatekey-text-box {
+    color: #000;
+    font-size: 12px;
+    background-color: #FFF;
+}
+
+.paperwallet .art .address-text-box {
+    bottom: 56px;
+    left: 30px;
+    border-radius: 0px 1em 1em 0px;
+    padding: 0 0.5em 0 10px !important;
+}
+
+.paperwallet .art .privatekey-text-box {
+    height: 15px;
+    padding: 0px 0.5em 0px 0.5em !important;
+    width: 450px;
+}
+
+.paperwallet .art .privatekey-text-box.top {
+    left: 552px;
+    top: 78px;
+    border-radius: 0.4em 0px 0px 0.4em;
+}
+
+.paperwallet .art .privatekey-text-box.bottom {
+    top: 235px;
+    left: 552px;
+    border-radius: 0px 0.4em 0.4em 0px;
+    text-align: right;
+    -webkit-transform: rotate(180deg); 
+    -moz-transform: rotate(180deg); 
+    -o-transform: rotate(180deg);
+    -ms-transform: rotate(180deg);
+}
+
+.paperwallet .art .privatekey-text-box.small {
+    font-size: 11px;
+}
+
+.paperwallet .art .privatekey-text {
+    position: relative;
+    top: -2px;
+}

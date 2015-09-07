@@ -1,0 +1,33 @@
+{
+  "name": "element-icon-identicon",
+  "version": "1.0.0",
+  "authors": [
+    "\"Ron Waldon\" (@jokeyrhyme)"
+  ],
+  "description": "identicon element",
+  "moduleType": [
+    "amd",
+    "globals"
+  ],
+  "keywords": [
+    "webcomponents",
+    "polymer",
+    "angularjs",
+    "identicon"
+  ],
+  "license": "BSD",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "devDependencies": {
+    "angular": "~1.2.20",
+    "chance": "~0.5.6",
+    "platform": "Polymer/platform#~0.3.4",
+    "polymer": "Polymer/polymer#~0.3.4",
+    "requirejs": "~2.1.14"
+  }
+}
