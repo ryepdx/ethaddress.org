@@ -29,3 +29,5 @@ node_modules
 # Editor files
 *.sw*
 
+# Build files, which all get inlined in index.html.
+build/*
