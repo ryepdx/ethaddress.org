@@ -6,6 +6,16 @@
   -ms-transform: rotate(90deg);
   -webkit-transform: rotate(90deg);
   -o-transform: rotate(90deg);
-  width: 300px;
+  transform-origin: left bottom;
+  -moz-transform-origin: left bottom;
+  -ms-transform-origin: left bottom;
+  -webkit-transform-origin: left bottom;
+  -o-transform-origin: left bottom;
 }
-.single.paperwallet.back { top: 710px; }
+
+.single.paperwallet.front { top: -360px; }
+.single.paperwallet.back { top: 330px; }
+
+.single.paperwallet .art .wallet-image {
+    background-position: left 2px top;
+} 

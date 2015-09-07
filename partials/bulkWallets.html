@@ -38,7 +38,8 @@
   </div>
   <div class="page" ng-repeat="page in getPages()" ng-if="walletType=='paper'">
     <div class="row paperwallet front" ng-repeat="wallet in page">
-      <div class="art col s12" ng-class="{'no-art': walletArt === 'none'}">
+      <div class="art col s12">
+        <div class="wallet-image" ng-class="{'no-art': walletArt === 'none'}"></div>
         <icon-identicon class="identicon" code="{{wallet.address}}" ng-show="walletArt !== 'none'" size="81"></icon-identicon>
         <qrcode class="address-qr" size="80" data="{{wallet.address}}"></qrcode>
         <qrcode class="privatekey-qr" size="133" version="8" data="{{wallet.private}}"></qrcode>
@@ -49,7 +50,9 @@
     </div>
     <div class="page-break" ng-if="showBack && walletArt !== 'none'" />
     <div class="row paperwallet back" ng-repeat="wallet in page" ng-show="showBack && walletArt !== 'none'">
-      <div class="art col s12"></div>
+      <div class="art col s12">
+        <div class="wallet-image" ng-class="{'no-art': walletArt === 'none'}"></div>
+      </div>
     </div>
     <div class="page-break" ng-if="!$last" />
   </div>

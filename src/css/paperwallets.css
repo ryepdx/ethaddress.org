@@ -11,24 +11,24 @@
     position: absolute;
 }
 
-.paperwallet div.art{
+.paperwallet .art .wallet-image {
   width: 1010px;
   height: 331px;
 }
 
-.paperwallet.front div.art.no-art,
-.paperwallet.back div.art.no-art {
+.paperwallet.front .art .wallet-image.no-art,
+.paperwallet.back .art .wallet-image.no-art {
   background-image: none;
 }
 
-.paperwallet.front div.art {
-  background: url("./images/wallet_front1.png") no-repeat left 0.75rem top;
-  background-size: 100%;
+.paperwallet.front .art .wallet-image {
+  background: url("./images/wallet_front1.png") no-repeat;
+  background-size: 100% 100%;
 }
 
-.paperwallet.back div.art {
-  background: url("./images/wallet_back1.png") no-repeat left 0.75rem top;
-  background-size: 100%;
+.paperwallet.back .art .wallet-image {
+  background: url("./images/wallet_back1.png") no-repeat;
+  background-size: 100% 100%;
 }
 
 .paperwallet .art .red-x {
