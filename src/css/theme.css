@@ -3,3 +3,16 @@ footer.page-footer {
     text-align: center;
     padding: 0px;
 }
+
+.btn img, .btn-large img {
+    vertical-align: middle;
+    height: 32px;
+}
+
+#nav-mobile-button {
+    display: inline-block;
+}
+
+#nav-mobile-button img {
+    margin-top: 1em;
+}

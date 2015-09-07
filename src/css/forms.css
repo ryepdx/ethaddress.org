@@ -1,0 +1,20 @@
+input.ng-invalid {
+  border-bottom: 1px solid #F44336;
+  box-shadow: 0px 1px 0px 0px #F44336;
+}
+
+input.ng-valid.ng-dirty {
+  border-bottom: 1px solid #4CAF50;
+  box-shadow: 0px 1px 0px 0px #4CAF50;
+}
+
+.hidden-file-input {
+  position: absolute;
+  width: 0px;
+  height: 0px;
+  overflow: hidden;
+}
+
+.wallet-info {
+  overflow-wrap: break-word;
+}

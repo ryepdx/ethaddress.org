@@ -1,0 +1,72 @@
+<div id="importWallet" class="row">
+  <div class="row screen-only">
+    <div class="input-field col s12 screen-only" ng-hide="encryptedWallet">
+      <label for="key" ng-class="{active: key}">Private Key</label>
+      <input type="{{keyInputType}}" ng-init="keyInputType=password" ng-focus="keyInputType='text'" ng-blur="keyInputType='password'" ng-model="key" id="key" />
+    </div>
+    <div ng-show="encryptedWallet && !keyEntered">
+        <div class="input-field col s12 screen-only">
+          <label for="password">Password</label><input type="password" ng-model="password" ng-change="error=null" />
+        </div>
+        <div class="col m2 s12">
+          <button class="btn green col s12 row" ng-class="{disabled: !password}" ng-click="decrypt()">Unlock</button>
+        </div>
+        <div class="col m2 s12">
+            <button class="btn red col s12 row" ng-click="cancelDecrypt()">Cancel</button>
+        </div>
+    </div>
+    <div class="col s12" ng-show="error">
+      <div class="card-panel red">
+        <span class="white-text">{{error}}</span>
+      </div>
+    </div>
+    <qr-scanner ng-if="canScan && scanningQR" ng-success="decodeQR(data)" ng-video-error="cannotScan()" ng-video-source="videoSource"></qr-scanner> 
+    <button class="btn col s12" ng-clock="toggleQRScanning()" ng-show="scanningQR">Cancel</button>
+    <div ng-hide="scanningQR || keyEntered || encryptedWallet">
+        <div class="col m2 s12" ng-if="canScan">
+            <button class="btn col s12 row" ng-click="toggleQRScanning()">Scan QR Code</button>
+        </div>
+        <div class="col m2 s12">
+            <button class="btn col s12 row" ng-click="uploadQR()">Use QR Photo</button>
+        </div>
+        <div class="col m2 s12">
+            <button class="btn col s12 row" ng-click="uploadWallet()">Load File</button>
+        </div>
+    </div>
+    <input class="hidden-file-input" type="file" onchange="angular.element(this).scope().qrUploaded()" id="qr-input" accept="image/*" capture="camera"></input>
+    <input class="hidden-file-input" type="file" onchange="angular.element(this).scope().walletUploaded(this)" id="file-input"></input>
+  </div>
+  <div class="row screen-only wallet-info" ng-show="address">
+    <p>Address: {{address}}</p>
+  </div>
+  <div class="row screen-only" ng-show="address">
+    <select class="input-field" ng-model="walletArt" ng-init="walletArt='earth'" material-select>
+      <option value="earth">Earth</option>
+      <option value="none">No wallet art</option>
+    </select>
+    <p ng-hide="walletArt=='none'"><input type="checkbox" ng-model="showBack" ng-init="showBack=true" id="showBack"/><label for="showBack">Show wallet back</label></p>
+    <div class="col m1 s12">
+      <a class="col row s12 small btn-large blue" ng-click="print()"><img src="./images/print.svg" /></a>
+    </div>
+  </div>
+  <div ng-show="address">
+    <div class="row single paperwallet front">
+      <div class="art col s12">
+        <img src="./images/wallet_front1.png" ng-show="walletArt !== 'none'" inline />
+        <div class="placeholder" ng-show="walletArt === 'none'"></div>
+        <icon-identicon class="identicon" code="{{address}}" ng-show="walletArt !== 'none'" size="81"></icon-identicon>
+        <qrcode class="address-qr" size="80" data="{{address}}"></qrcode>
+        <qrcode class="privatekey-qr" size="133" version="8" data="{{key}}"></qrcode>
+        <div class="address-text-box"><span class="address-text">{{address}}</span></div>
+        <div class="privatekey-text-box top"><span class="privatekey-text">{{key}}</span></div>
+        <div class="privatekey-text-box bottom"><span class="privatekey-text">{{key}}</span></div>
+      </div>
+    </div>
+    <div class="page-break" ng-if="showBack && walletArt !== 'none'" />
+    <div class="row single paperwallet back" ng-show="showBack && walletArt !== 'none'">
+      <div class="art col s12">
+        <img src="./images/wallet_back1.png" width="1010px" inline />
+      </div>
+    </div>
+  </div>
+</div>

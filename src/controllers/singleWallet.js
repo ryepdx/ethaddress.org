@@ -1,10 +1,10 @@
-EthPW.controllers.singleWallet = function ($scope) {
-    $scope.accounts = new Accounts();
+var Accounts = require('ethereumjs-accounts');
+
+module.exports = function ($scope) {
+    $scope.accounts = new Accounts({minPassphraseLength: 1});
     $scope.generateWallet = function () {
-      var account = $scope.usePassword ? $scope.accounts.new($scope.password) : $scope.accounts.new();
-      $scope.address = account.address;
-      $scope.private = account.private;
-      $scope.encrypted = account.encrypted;
+      var account = $scope.accounts.new($scope.password);
+      $scope.wallet = account;
       $scope.accounts.clear();
     };
     $scope.print = function () {window.print();};
@@ -21,7 +21,7 @@ EthPW.controllers.singleWallet = function ($scope) {
       return str.replace(/./g, '*');
     };
     $scope.exportKey = function () {
-      saveAs(new Blob([$scope.private], {type: "text/plain;charset=utf-8"}), $scope.address + ".key");
+      saveAs(new Blob([$scope.wallet.private], {type: "text/plain;charset=utf-8"}), $scope.wallet.address + ".prv");
     };
     $scope.generateWallet();
 };

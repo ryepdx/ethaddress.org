@@ -1,38 +1,60 @@
-<div class="col s9">
-  <div id="bulkWallets">
-      <div class="input-field screen-only">
-          <input id="numWallets" type="number" class="validate" ng-model="numWallets" />
-          <label for="numWallets">Number of wallets</label>
+<div id="bulkWallets" class="row">
+  <div class="input-field screen-only">
+    <input id="numWallets" type="number" class="validate" ng-model="numWallets" />
+    <label for="numWallets">Number of wallets</label>
+  </div>
+  <div class="input-field screen-only">
+    <select id="walletType" ng-model="walletType" ng-init="walletType='paper'" material-select watch>
+      <option value="paper">Paper Wallets</option>
+      <option value="csv">CSV</option>
+    </select>
+  </div>
+  <div class="row screen-only" ng-show="walletType=='paper'">
+    <select class="input-field" ng-model="walletArt" ng-init="walletArt='earth'" material-select watch>
+      <option value="earth">Earth</option>
+      <option value="none">No wallet art</option>
+    </select>
+    <p ng-hide="walletArt=='none'"><input type="checkbox" ng-model="showBack" ng-init="showBack=true" id="showBack"/><label for="showBack">Show wallet backs</label></p>
+  </div>
+  <div class="input-field screen-only" ng-show="walletType=='paper'">
+    <input id="perPage" type="number" class="validate" ng-model="perPage" />
+    <label for="perPage">Wallets per page</label>
+  </div>
+  <div class="row screen-only">
+    <p><input type="checkbox" ng-model="usePassword" id="usePassword" /><label for="usePassword">Generate encrypted wallets</label></p>
+    <p ng-show="usePassword"><label for="password">Password:</label><input type="password" ng-model="password" placeholder="Do not forget this!" /></p>
+    <div class="col m3 s12">
+        <button class="btn-large green col s12 row" ng-click="generateWallets()">Generate wallets!</button>
+    </div>
+    <div class="col m1 s12">
+      <a class="col row s12 small btn-large blue" ng-click="print()"><img src="./images/print.svg" /></a>
+    </div>
+    <div class="col m1 s12">
+      <a class="col row s12 small btn-large blue" ng-click="exportKeys()"><img src="./images/download.svg" /></a>
+    </div>
+  </div>
+  <div class="row csv" ng-if="walletType=='csv'" on-click-select-all>
+    <div ng-repeat="wallet in wallets">{{$index+1}},"{{wallet.address}}","{{wallet.private}}"</div>
+  </div>
+  <div class="page" ng-repeat="page in getPages()" ng-if="walletType=='paper'">
+    <div class="row paperwallet front" ng-repeat="wallet in page">
+      <div class="art col s12">
+        <img src="./images/wallet_front1.png" ng-show="walletArt !== 'none'" inline />
+        <div class="placeholder" ng-show="walletArt === 'none'"></div>
+        <icon-identicon class="identicon" code="{{wallet.address}}" ng-show="walletArt !== 'none'" size="81"></icon-identicon>
+        <qrcode class="address-qr" size="80" data="{{wallet.address}}"></qrcode>
+        <qrcode class="privatekey-qr" size="133" version="8" data="{{wallet.private}}"></qrcode>
+        <div class="address-text-box"><span class="address-text">{{wallet.address}}</span></div>
+        <div class="privatekey-text-box top" ng-if="!wallet.encrypted"><span class="privatekey-text">{{wallet.private}}</span></div>
+        <div class="privatekey-text-box bottom" ng-if="!wallet.encrypted"><span class="privatekey-text">{{wallet.private}}</span></div>
       </div>
-      <div class="input-field screen-only">
-          <input id="perPage" type="number" class="validate" ng-model="perPage" />
-          <label for="perPage">Wallets per page</label>
+    </div>
+    <div class="page-break" ng-if="showBack && walletArt !== 'none'" />
+    <div class="row paperwallet back" ng-repeat="wallet in page" ng-show="showBack && walletArt !== 'none'">
+      <div class="art col s12">
+        <img src="./images/wallet_back1.png" width="1010px" inline />
       </div>
-      <div class="input-field screen-only">
-          <select ng-model="walletArt">
-              <option value="none">No wallet art</option>
-          </select>
-      </div>
-      <div class="row screen-only">
-          <p>
-              <button class="btn-large green" ng-click="generateWallets()">Generate wallets!</button>
-              <i class="small mdi-action-print btn-large blue" ng-show="wallets.length > 0" ng-click="print()"></i>
-              <i class="small mdi-file-file-download btn-large blue" ng-show="wallets.length > 0" ng-click="exportKeys()"></i>
-          </p>
-          <p><input type="checkbox" ng-model="usePassword" id="usePassword" /><label for="usePassword">Generate encrypted wallets</label></p>
-          <p ng-show="usePassword"><label for="password">Password:</label><input type="password" ng-model="password" placeholder="Do not forget this!" /></p>
-      </div>
-      <div class="row paperwallet" ng-repeat="wallet in wallets">
-          <div class="address col m4 s12">
-              <qrcode size="150" data="{{wallet.address}}"></qrcode>
-              <p>Address (SHARE)</p>
-          </div>
-          <div class="privateKey col m4 s12">
-              <qrcode size="150" version="8" data="{{wallet.private}}" ng-if="wallet.encrypted"></qrcode>
-              <qrcode size="150" version="8" data="{{base58(wallet.private)}}" ng-if="!wallet.encrypted"></qrcode>
-              <p>Private Key (HIDE)</p>
-          </div>
-          <div class="page-break" ng-if="perPage && (!$first || perPage === 1) && ($index+1) % perPage === 0" />
-      </div>
+    </div>
+    <div class="page-break" ng-if="!$last" />
   </div>
 </div>

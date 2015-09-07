@@ -1,34 +1,51 @@
-<div class="col s9">
-  <div id="singleWallet">
-      <div class="row paperwallet">
-          <div class="address col m4 s12">
-              <qrcode size="150" data="{{address}}"></qrcode>
-              <p>Address (SHARE)</p>
-          </div>
-          <div class="privateKey col m4 s12">
-              <qrcode size="150" version="8" data="{{private}}" ng-if="encrypted"></qrcode>
-              <qrcode size="150" version="8" data="{{base58(private)}}" ng-if="!encrypted"></qrcode>
-              <p>Private Key (HIDE)</p>
-          </div>
-      </div>
+<div class="row screen-only">
+  <div class="col s12">
+    <select class="input-field" ng-model="walletArt" ng-init="walletArt='earth'" material-select>
+      <option value="earth">Earth</option>
+      <option value="none">No wallet art</option>
+    </select>
   </div>
-  <div class="row screen-only">
-      <p>Address: {{address}}</p>
-      <p>Private Key: <span ng-hide="showPrivate" ng-mouseover="showPrivate=true">{{obfuscate(private)}}</span>
-                  <span ng-show="showPrivate" ng-mouseout="showPrivate=false">{{private}}</span>
-      </p>
-      <p ng-hide="encrypted">Private Key (Base58): <span ng-hide="showBase58Private" ng-mouseover="showBase58Private=true">{{obfuscate(base58(private))}}</span>
-                  <span ng-show="showBase58Private" ng-mouseout="showBase58Private=false">{{base58(private)}}</span>
-      </p>
-      <p>
-      
-      </p>
-      <p>
-          <button class="btn-large green" ng-click="generateWallet()">Generate another wallet!</button>
-          <i class="small mdi-action-print btn-large blue" ng-click="print()"></i>
-          <i class="small mdi-file-file-download btn-large blue" ng-click="exportKey()"></i>
-      </p>
-      <p><input type="checkbox" ng-model="usePassword" id="usePassword" /><label for="usePassword">Generate encrypted wallets</label></p>
-      <p ng-show="usePassword"><label for="password">Password:</label><input type="password" ng-model="password" placeholder="Do not forget this!" /></p>
+  <div class="col s12">
+    <input type="checkbox" ng-model="showBack" ng-init="showBack=true" id="showBack"/><label for="showBack">Show wallet back</label></p>
+  </div>
+  <div class="col s12">
+    <input type="checkbox" ng-model="usePassword" id="usePassword" /><label for="usePassword">Encrypt wallets</label></div>
+  </div>
+  <div class="col s12" ng-show="usePassword">
+    <label for="password">Password:</label><input type="password" ng-model="password" placeholder="Do not forget this!" />
+  </div>
+  <div class="col m3 s12">
+      <button class="btn-large green col s12 row" ng-click="generateWallet()">Generate wallet!</button>
+  </div>
+  <div class="col m1 s12">
+    <a class="col row s12 small btn-large blue" ng-click="print()"><img src="./images/print.svg" /></a>
+  </div>
+  <div class="col m1 s12">
+    <a class="col row s12 small btn-large blue" ng-click="exportKey()"><img src="./images/download.svg" /></a>
+  </div>
+</div>
+<div class="row screen-only">
+  <div class="col s12 wallet-info">
+    <p>Address: {{wallet.address}}</p>
+    <p>Private Key: <span ng-hide="showPrivate" ng-mouseover="showPrivate=true">{{obfuscate(wallet.private)}}</span>
+                <span ng-show="showPrivate" ng-mouseout="showPrivate=false" on-click-select-all>{{wallet.private}}</span>
+  </div>
+</div>
+<div class="row single paperwallet front">
+  <div class="art col s12">
+    <img src="./images/wallet_front1.png" ng-show="walletArt !== 'none'" inline />
+    <div class="placeholder" ng-show="walletArt === 'none'"></div>
+    <icon-identicon class="identicon" code="{{wallet.address}}" ng-show="walletArt !== 'none'" size="81"></icon-identicon>
+    <qrcode class="address-qr" size="80" data="{{wallet.address}}"></qrcode>
+    <qrcode class="privatekey-qr" size="133" version="8" data="{{wallet.private}}"></qrcode>
+    <div class="address-text-box"><span class="address-text">{{wallet.address}}</span></div>
+    <div class="privatekey-text-box top" ng-if="!wallet.encrypted"><span class="privatekey-text">{{wallet.private}}</span></div>
+    <div class="privatekey-text-box bottom" ng-if="!wallet.encrypted"><span class="privatekey-text">{{wallet.private}}</span></div>
+  </div>
+</div>
+<div class="page-break" ng-if="showBack && walletArt !== 'none'" />
+<div class="row single paperwallet back" ng-show="showBack && walletArt !== 'none'">
+  <div class="art col s12">
+    <img src="./images/wallet_back1.png" width="1010px" inline />
   </div>
 </div>

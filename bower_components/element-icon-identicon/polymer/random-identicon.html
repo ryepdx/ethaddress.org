@@ -1,0 +1,34 @@
+<link rel="import" href="icon-identicon.html" />
+<script src="../bower_components/chance/chance.js"></script>
+
+<polymer-element name="random-identicon" attributes="fn size">
+  <template>
+    <style>
+    :host {
+      display: inline-block;
+    }
+    </style>
+    <icon-identicon code="{{code}}" size="{{size}}"></icon-identicon>
+  </template>
+  <script>
+  (function () {
+    'use strict';
+
+    var chance;
+
+    chance = new Chance();
+
+    Polymer('random-identicon', {
+      isContainer: false,
+      code: '',
+      size: 100,
+      ready: function () {
+        this.code = this.code || chance[this.fn]();
+      },
+      fnChanged: function () {
+        this.code = chance[this.fn]();
+      }
+    });
+  }());
+  </script>
+</polymer-element>

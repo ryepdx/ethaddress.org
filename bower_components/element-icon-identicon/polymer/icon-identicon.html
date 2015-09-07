@@ -1,0 +1,34 @@
+<script src="../lib/identicon-canvas.js"></script>
+
+<polymer-element name="icon-identicon" attributes="code size">
+  <template>
+    <style>
+    :host {
+      display: inline-block;
+    }
+    </style>
+    <canvas id="canvas"></canvas>
+  </template>
+  <script>
+  (function () {
+    'use strict';
+
+    Polymer('icon-identicon', {
+      isContainer: false,
+      code: '',
+      size: 100,
+      ready: function () {
+        var code;
+        code = identiconCanvas.fixCode(this.code);
+        identiconCanvas.render(this.$.canvas, code, parseInt(this.size, 10));
+      },
+      codeChanged: function () {
+        this.ready();
+      },
+      sizeChanged: function () {
+        this.ready();
+      }
+    });
+  }());
+  </script>
+</polymer-element>
