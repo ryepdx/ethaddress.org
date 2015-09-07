@@ -21,10 +21,14 @@ input.ng-valid.ng-dirty {
 
 a.print {
     background: transparent url("./images/print.svg") no-repeat center center;
-    background-size: 50%;
 }
 
 a.download {
     background: transparent url("./images/download.svg") no-repeat center center;
-    background-size: 50%;
 }
+
+a.print, a.download {
+    background-size: 36px;
+    min-width: 36px;
+}
+
