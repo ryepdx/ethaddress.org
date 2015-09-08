@@ -18,6 +18,7 @@ module.exports = function ($scope, $interval) {
 
     $scope.wallets = [];
     $scope.HPS = 0;
+    $scope.TTFF = formatSeconds(0);
     $scope.targetHPS = 200;
     $scope.searching = false;
     $scope.startSearching = function () {
@@ -60,6 +61,7 @@ module.exports = function ($scope, $interval) {
 
         var now = Date.now();
         $scope.HPS = that.intervalHashCount / ((now - that.intervalStart) / 1000);
+        updateTTFF(prefix, $scope.HPS);
         that.intervalHashCount = 0;
         that.intervalStart = now;
       }, 1000);
@@ -69,6 +71,49 @@ module.exports = function ($scope, $interval) {
       $scope.searching = false;
       generatePages();
     };
+
+    var formatSeconds = function (seconds) {
+        function pluralS (number) {
+            return (number !== 1) ? 's' : '';
+        }
+
+        var formattedArr = [];
+        var years = Math.floor(seconds / 31536000);
+        if (years) {
+            formattedArr.push(years + ' year' + pluralS(years));
+        }
+        var days = Math.floor((seconds %= 31536000) / 86400);
+        if (days || formattedArr.length > 0) {
+            formattedArr.push(days + ' day' + pluralS(days));
+        }
+        var hours = Math.floor((seconds %= 86400) / 3600);
+        if (hours || formattedArr.length > 0) {
+            formattedArr.push(hours + ' hour' + pluralS(hours));
+        }
+        var minutes = Math.floor((seconds %= 3600) / 60);
+        if (minutes || formattedArr.length > 0) {
+            formattedArr.push(minutes + ' minute' + pluralS(minutes));
+        }
+        seconds = Math.floor(seconds % 60);
+        if (seconds || formattedArr.length > 0) {
+            formattedArr.push(seconds + ' second' + pluralS(seconds));
+        }
+
+        if (formattedArr.length > 0) {
+            return formattedArr.join(", ");
+        }
+        return '< 1 second';
+    };
+    var updateTTFF = function (prefix, HPS) {
+      if (!prefix || !HPS) return;
+      $scope.TTFF = formatSeconds(Math.pow(16, prefix.length) / HPS);
+    };
+    $scope.$watch("prefix", function (prefix) {
+      updateTTFF(prefix, $scope.HPS > 0 ? $scope.HPS : $scope.targetHPS);
+    });
+    $scope.$watch("targetHPS", function (targetHPS) {
+      updateTTFF($scope.prefix, $scope.targetHPS);
+    });
 
     var pages = [];
     $scope.getPages = function () {
