@@ -21,7 +21,7 @@
       </div>
     </div>
     <qr-scanner ng-if="canScan && scanningQR" ng-success="decodeQR(data)" ng-video-error="cannotScan()" ng-video-source="videoSource"></qr-scanner> 
-    <button class="btn col s12" ng-clock="toggleQRScanning()" ng-show="scanningQR">Cancel</button>
+    <button class="btn col s12" ng-click="toggleQRScanning()" ng-show="scanningQR">Cancel</button>
     <div ng-hide="scanningQR || keyEntered || encryptedWallet">
         <div class="col m2 s12" ng-if="canScan">
             <button class="btn col s12 row" ng-click="toggleQRScanning()">Scan QR Code</button>
