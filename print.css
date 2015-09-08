@@ -3,12 +3,12 @@ html, body, main, div { margin: 0px !important; padding: 0px !important; width: 
 .page-break { display: block; page-break-before: always; }
 .paperwallet { width: 1010px !important; }
 .paperwallet .art .address-qr { left: 43px; }
-.paperwallet .art .privatekey-qr { left: 823px; }
+.paperwallet .art .privatekey-qr { left: 823px; filter: none !important; }
 .paperwallet .art .identicon { left: 42px; top: 51px; }
 .paperwallet .art .share-identicon { left: 146px; }
 .paperwallet .art .share-info-box { left: 42px; }
 .paperwallet .art .address-text-box { left: 18px; width: auto !important; }
-.paperwallet .art .privatekey-text-box { width: 450px !important; }
+.paperwallet .art .privatekey-text-box { width: 450px !important; color: black !important; text-shadow: none !important; }
 .paperwallet .art .privatekey-text-box.top { left: 540px !important; }
 .paperwallet .art .privatekey-text-box.bottom { left: 540px !important; }
 

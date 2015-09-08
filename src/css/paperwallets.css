@@ -76,6 +76,11 @@
 .paperwallet .art .privatekey-qr {
     top: 97px;
     left: 834px;
+    filter: blur(4px);
+}
+
+.paperwallet .art .privatekey-qr:hover {
+    filter: none;
 }
 
 .paperwallet .art .identicon {
@@ -107,6 +112,12 @@
     height: 15px;
     padding: 0px 0.5em 0px 0.5em !important;
     width: 450px;
+    color: transparent;
+    text-shadow: 0 0 4px black;
+}
+.paperwallet .art .privatekey-text-box:hover {
+    color: black;
+    text-shadow: none;
 }
 
 .paperwallet .art .privatekey-text-box.top {
