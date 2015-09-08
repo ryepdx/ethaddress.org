@@ -55,7 +55,7 @@
   </div>
 </div>
 </div>
-<div class="row csv" ng-if="walletType=='csv'" on-click-select-all>
+<div class="row col s12 csv" ng-if="walletType=='csv'" on-click-select-all>
   <div ng-repeat="wallet in wallets">{{$index+1}},"{{wallet.address}}","{{wallet.private}}"</div>
 </div>
 <div class="page" ng-repeat="page in getPages()" ng-if="walletType=='paper'">
