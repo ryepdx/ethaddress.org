@@ -32,7 +32,7 @@
       <icon-identicon class="identicon" code="{{address}}" size="81"></icon-identicon>
       <qrcode class="address-qr" size="80" data="{{address}}"></qrcode>
       <qrcode class="privatekey-qr" size="133" version="8" ng-if="!hideKey" data="{{private}}"></qrcode>
-      <div class="privatekey-qr red-x" ng-if="hideKey"></div>
+      <div class="privatekey-qr red-x" ng-if="hideKey && walletArt !== 'none'"></div>
       <div class="address-text-box"><span class="address-text">{{address}}</span></div>
       <div class="privatekey-text-box top" ng-if="!hideKey"><span class="privatekey-text">{{private}}</span></div>
       <div class="privatekey-text-box bottom" ng-if="!hideKey"><span class="privatekey-text">{{private}}</span></div>
