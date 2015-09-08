@@ -18,7 +18,7 @@ module.exports = function ($scope, $interval) {
 
     $scope.wallets = [];
     $scope.HPS = 0;
-    $scope.TTFF = formatSeconds(0);
+    $scope.TTFF = 0;
     $scope.targetHPS = 200;
     $scope.searching = false;
     $scope.startSearching = function () {
@@ -114,6 +114,7 @@ module.exports = function ($scope, $interval) {
     $scope.$watch("targetHPS", function (targetHPS) {
       updateTTFF($scope.prefix, $scope.targetHPS);
     });
+    $scope.TTFF = formatSeconds(0);
 
     var pages = [];
     $scope.getPages = function () {
