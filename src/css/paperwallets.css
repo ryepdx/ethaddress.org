@@ -77,6 +77,8 @@
     top: 97px;
     left: 834px;
     filter: blur(4px);
+    -moz-filter: blur(4px);
+    -webkit-filter: blur(4px);
 }
 
 .paperwallet .art .privatekey-qr:hover {
