@@ -1,9 +1,9 @@
 <div class="row">
   <p>EthAddress.org is hosted on both <a href="https://ryepdx.github.io/ethaddress.org/">Github pages</a> and a <a href="https://ethaddress.org/">dedicated server</a> bought and provisioned by <a href="http://ryepdx.com">the website's maintainer</a>.</p>
 
-  <p>The source code can be found <a href="https://github.com/ryepdx/ethaddress.org">on Github</a>. For extra security, it's recommended that you download <a href="https://github.com/ryepdx/ethaddress.org/raw/master/index.html">the signed HTML bundle</a> (<a href="https://github.com/ryepdx/ethaddress.org/raw/master/index.sig">sig</a> &amp; <a href="http://ryepdx.com/ryepdx.gpg">key</a>) from the Github repository and run the website locally on an offline machine.</p>
+  <p>The source code can be found <a href="https://github.com/ryepdx/ethaddress.org">on Github</a>. For extra security, it's recommended that you download either <a href="https://ethaddress.org/tarball">the tarball</a> or <a href="https://ethaddress.org/zip">the zip file</a> of the signed HTML bundle (<a href="https://github.com/ryepdx/ethaddress.org/raw/master/index.html.sig">sig</a> &amp; <a href="http://ryepdx.com/ryepdx.gpg">key</a>) and run the website locally on an offline machine after verifying the signature. Alternatively, you could download the HTML bundle very quickly by just saving this page to your hard drive. (Not recommended if you plan on storing large sums of ether, though!)</p> 
 
-  <p>Donations are always welcome at 0xa3acb4270415692cc4532a129534048364dcb1b2.</p>
+  <p style="word-break: break-all">Donations are always welcome at <span on-click-select-all>0xa3acb4270415692cc4532a129534048364dcb1b2</span>.</p>
 
   <p>Finally, you might have noticed that there is no entropy generation step as there is at websites like <a href="https://bitaddress.org/">BitAddress.org</a>. This website relies on the cryptographically strong <a href="https://developer.mozilla.org/en-US/docs/Web/API/RandomSource/getRandomValues">window.crypto.getRandomValues</a> function available in modern browsers, which harvests entropy from your OS's entropy pool. If you have reason to believe that this is insecure and are willing to school me on the subject, <a href="https://github.com/ryepdx/ethaddress.org/issues">open an issue</a> and we'll talk it out.</p>
 </div>
