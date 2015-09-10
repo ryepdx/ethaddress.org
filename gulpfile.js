@@ -46,7 +46,6 @@ gulp.task('compile', ['clean'], function () {
     .pipe(fontFilter.restore)
     .pipe(jsFilter)
     .pipe(concat('bower.js'))
-    .pipe(uglify({mangle: false}))
     .pipe(gulp.dest('./build'))
     .pipe(jsFilter.restore)
     .pipe(cssFilter)
@@ -60,19 +59,25 @@ gulp.task('compile', ['clean'], function () {
     .pipe(cssFilter.restore);
 });
 
-gulp.task('inlinesource', ['compile', 'browserify'], function () {
+gulp.task('inlinesource', ['compile', 'browserify', 'uglify'], function () {
     return gulp.src('./src/index.html')
         .pipe(inlinesource({compress: false, rootpath: __dirname}))
         .pipe(gulp.dest('.'));
 });
 
 gulp.task('browserify', ['clean', 'compile', 'hint'], function() {
-   return browserify('src/app.js')
-      .bundle()
+   return browserify('src/app.js').bundle()
       .pipe(source('npm.js'))
       .pipe(gulp.dest('./build'));
 });
 
-gulp.task('build', ['compile', 'browserify', 'inlinesource']);
+gulp.task('uglify', ['compile', 'browserify'], function () {
+    return gulp.src(['./build/bower.js', './build/npm.js'])
+      .pipe(concat('all.js'))
+      .pipe(uglify({mangle: true}))
+      .pipe(gulp.dest('./build'));
+});
+
+gulp.task('build', ['compile', 'browserify', 'uglify', 'inlinesource']);
 
 gulp.task('default', ['build', 'watch']);
