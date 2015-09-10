@@ -60,7 +60,7 @@ gulp.task('compile', ['clean'], function () {
 
 gulp.task('inlinesource', ['compile', 'browserify', 'uglify'], function () {
     return gulp.src('./src/index.html')
-        .pipe(inlinesource({compress: false, rootpath: __dirname}))
+        .pipe(inlinesource({rootpath: __dirname}))
         .pipe(gulp.dest('.'));
 });
 
