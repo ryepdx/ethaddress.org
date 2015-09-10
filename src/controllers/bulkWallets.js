@@ -1,6 +1,6 @@
 var Accounts = require('ethereumjs-accounts');
 
-module.exports = function ($scope) {
+module.exports = ['$scope', function ($scope) {
     var that = this;
     $scope.wallets = [];
     that.accounts = new Accounts({minPassphraseLength: 1});
@@ -64,4 +64,4 @@ module.exports = function ($scope) {
       saveAs(zip.generate({type:"blob"}), "wallets.zip");
     };
     $scope.generateWallets();
-};
+}];

@@ -1,6 +1,6 @@
 var Accounts = require('ethereumjs-accounts');
 
-module.exports = function ($scope, $interval) {
+module.exports = ['$scope', '$interval', function ($scope, $interval) {
     var that = this;
     that.accounts = new Accounts({minPassphraseLength: 1});
     that.hash = function (prefix) {
@@ -165,4 +165,4 @@ module.exports = function ($scope, $interval) {
       }
       saveAs(zip.generate({type:"blob"}), "wallets.zip");
     };
-};
+}];
