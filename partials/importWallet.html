@@ -36,18 +36,18 @@
     <input class="hidden-file-input" type="file" onchange="angular.element(this).scope().qrUploaded()" id="qr-input" accept="image/*" capture="camera"></input>
     <input class="hidden-file-input" type="file" onchange="angular.element(this).scope().walletUploaded(this)" id="file-input"></input>
   </div>
-  <div class="row screen-only wallet-info" ng-show="address">
+  <div class="row col s12 screen-only wallet-info" ng-show="address">
     <p>Address: {{address}}</p>
   </div>
-  <div class="row screen-only" ng-show="address">
+  <div class="row col s12 screen-only" ng-show="address">
     <select class="input-field" ng-model="walletArt" ng-init="walletArt='earth'" material-select>
       <option value="earth">Earth</option>
       <option value="none">No wallet art</option>
     </select>
     <p ng-hide="walletArt=='none'"><input type="checkbox" ng-model="showBack" ng-init="showBack=true" id="showBack"/><label for="showBack">Show wallet back</label></p>
-    <div class="col m1 s12">
-      <a class="col row s12 small btn-large blue print" ng-click="print()"></a>
-    </div>
+  </div>
+  <div class="col m1 s12 screen-only" ng-show="address">
+    <a class="col row s12 small btn-large blue print" ng-click="print()"></a>
   </div>
   <div ng-show="address">
     <div class="row single paperwallet front">

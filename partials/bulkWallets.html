@@ -1,28 +1,30 @@
 <div id="bulkWallets" class="row">
-  <div class="input-field screen-only">
+  <div class="col s12 input-field screen-only">
     <input id="numWallets" type="number" class="validate" ng-model="numWallets" />
     <label for="numWallets">Number of wallets</label>
   </div>
-  <div class="input-field screen-only">
+  <div class="col s12 input-field screen-only">
     <select id="walletType" ng-model="walletType" ng-init="walletType='paper'" material-select watch>
       <option value="paper">Paper Wallets</option>
       <option value="csv">CSV</option>
     </select>
   </div>
-  <div class="row screen-only" ng-show="walletType=='paper'">
+  <div class="row col s12 screen-only" ng-show="walletType=='paper'">
     <select class="input-field" ng-model="walletArt" ng-init="walletArt='earth'" material-select watch>
       <option value="earth">Earth</option>
       <option value="none">No wallet art</option>
     </select>
     <p ng-hide="walletArt=='none'"><input type="checkbox" ng-model="showBack" ng-init="showBack=true" id="showBack"/><label for="showBack">Show wallet backs</label></p>
   </div>
-  <div class="input-field screen-only" ng-show="walletType=='paper'">
+  <div class="col s12 input-field screen-only" ng-show="walletType=='paper'">
     <input id="perPage" type="number" class="validate" ng-model="perPage" />
     <label for="perPage">Wallets per page</label>
   </div>
-  <div class="row screen-only">
+  <div class="row col s12 screen-only">
     <p><input type="checkbox" ng-model="usePassword" id="usePassword" /><label for="usePassword">Generate encrypted wallets</label></p>
     <p ng-show="usePassword"><label for="password">Password:</label><input type="password" ng-model="password" placeholder="Do not forget this!" /></p>
+  </div>
+  <div class="row screen-only">
     <div class="col m3 s12">
         <button class="btn-large green col s12 row" ng-click="generateWallets()">Generate wallets!</button>
     </div>
