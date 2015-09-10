@@ -1,7 +1,6 @@
 var gulp = require('gulp');
 var filter = require('gulp-filter');
 var concat = require('gulp-concat');
-var minifyCSS = require('gulp-minify-css');
 var concatCSS = require('gulp-concat-css');
 var purifycss = require('gulp-purifycss');
 var inlinesource = require('gulp-inline-source');
@@ -52,7 +51,6 @@ gulp.task('compile', ['clean'], function () {
     .pipe(inline_base64({baseDir: './'}))
     .pipe(concatCSS('all.css'))
     .pipe(purifycss(["./src/index.html", "./partials/*.html", "./build/bower.js"]))
-    .pipe(minifyCSS({semanticMerging: true}))
     .pipe(gulp.dest('./build'))
     .pipe(cssFilter.restore);
 });
