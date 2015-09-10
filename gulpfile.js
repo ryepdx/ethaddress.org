@@ -1,7 +1,6 @@
 var gulp = require('gulp');
 var filter = require('gulp-filter');
 var concat = require('gulp-concat');
-var uglify = require('gulp-uglify');
 var minifyCSS = require('gulp-minify-css');
 var concatCSS = require('gulp-concat-css');
 var purifycss = require('gulp-purifycss');
@@ -58,7 +57,7 @@ gulp.task('compile', ['clean'], function () {
     .pipe(cssFilter.restore);
 });
 
-gulp.task('inlinesource', ['compile', 'browserify', 'uglify'], function () {
+gulp.task('inlinesource', ['compile', 'browserify', 'concatjs'], function () {
     return gulp.src('./src/index.html')
         .pipe(inlinesource({rootpath: __dirname}))
         .pipe(gulp.dest('.'));
@@ -70,13 +69,12 @@ gulp.task('browserify', ['clean', 'compile', 'hint'], function() {
       .pipe(gulp.dest('./build'));
 });
 
-gulp.task('uglify', ['compile', 'browserify'], function () {
+gulp.task('concatjs', ['compile', 'browserify'], function () {
     return gulp.src(['./build/bower.js', './build/npm.js'])
       .pipe(concat('all.js'))
-      .pipe(uglify({mangle: true}))
       .pipe(gulp.dest('./build'));
 });
 
-gulp.task('build', ['compile', 'browserify', 'uglify', 'inlinesource']);
+gulp.task('build', ['compile', 'browserify', 'concatjs', 'inlinesource']);
 
 gulp.task('default', ['build', 'watch']);
