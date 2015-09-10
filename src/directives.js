@@ -19,7 +19,7 @@ module.exports = function (app) {
       replace: true,
       template: '<img src="{{src}}" />',
       link: function (scope, element) {
-        scope.src = $(element).css('background-image').replace(/^url\(['|"]/, '').replace(/['|"]\)$/, '');
+        scope.src = $(element).css('background-image').replace(/^url\(['|"]?/, '').replace(/['|"]?\)$/, '');
       }
     };
   });
