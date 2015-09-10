@@ -86,6 +86,8 @@
 
 .paperwallet .art .privatekey-qr:hover {
     filter: none;
+    -moz-filter: blur(4px);
+    -webkit-filter: blur(4px);
 }
 
 .paperwallet .art .identicon {
