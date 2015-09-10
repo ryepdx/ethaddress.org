@@ -18,7 +18,7 @@
 
 .paperwallet.front .art .wallet-image.no-art,
 .paperwallet.back .art .wallet-image.no-art {
-  background-image: none;
+  visibility: hidden;
 }
 
 .paperwallet.front .art .wallet-image {
@@ -31,11 +31,14 @@
   background-size: 100% 100%;
 }
 
-.paperwallet .art .red-x {
+.paperwallet .art .privatekey-qr.red-x {
   width: 133px;
   height: 133px;
   background: url("./images/red-x.svg") no-repeat center center;
   background-size: 100%;
+  filter: none;
+  -moz-filter: none;
+  -webkit-filter: none;
 }
 
 .paperwallet .art .address-qr {

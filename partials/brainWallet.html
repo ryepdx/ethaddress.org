@@ -48,7 +48,7 @@
 <div class="row" ng-show="address && private">
   <div class="row single paperwallet front">
     <div class="art col s12">
-      <div class="wallet-image" ng-class="{'no-art': walletArt === 'none'}"></div>
+      <css-img class="wallet-image" ng-class="{'no-art': walletArt === 'none'}"></css-img>
       <icon-identicon class="identicon" code="{{address}}" size="81"></icon-identicon>
       <qrcode class="address-qr" size="80" data="{{address}}"></qrcode>
       <qrcode class="privatekey-qr" size="133" version="8" ng-if="!hideKey" data="{{private}}"></qrcode>
@@ -61,7 +61,7 @@
   <div class="page-break" ng-if="showFront && showBack" />
   <div class="row single paperwallet back" ng-show="showBack && walletArt !== 'none'">
     <div class="art col s12">
-      <div class="wallet-image" ng-class="{'no-art': walletArt === 'none'}"></div>
+      <css-img class="wallet-image" ng-class="{'no-art': walletArt === 'none'}"></css-img>
     </div>
   </div>
 </div>
