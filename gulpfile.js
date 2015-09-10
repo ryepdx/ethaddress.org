@@ -38,7 +38,7 @@ gulp.task('compile', ['clean'], function () {
   allFiles = getFileGlobs();
   var jsFilter = filter('*.js', {restore: true});
   var cssFilter = filter('*.css', {restore: true});
-  var fontFilter = filter(['*.eot', '*.woff', '*.woff2', '*.svg', '*.ttf'], {restore: true}); 
+  var fontFilter = filter(['Roboto-Regular.woff'], {restore: true}); 
 
   return gulp.src(allFiles)
     .pipe(fontFilter)
@@ -49,12 +49,11 @@ gulp.task('compile', ['clean'], function () {
     .pipe(gulp.dest('./build'))
     .pipe(jsFilter.restore)
     .pipe(cssFilter)
-    .pipe(purifycss(["./src/index.html", "./partials/*.html", "./build/bower.js"]))
     .pipe(replace(/(\.\.\/)*font\/[^\/]+/ig, './fonts'))
     .pipe(inline_base64({baseDir: './'}))
     .pipe(concatCSS('all.css'))
-    .pipe(minifyCSS())
-    .pipe(replace(/@font-face{font-family:Material-Design-Icons[^}]*}/ig, ''))
+    .pipe(purifycss(["./src/index.html", "./partials/*.html", "./build/bower.js"]))
+    .pipe(minifyCSS({semanticMerging: true}))
     .pipe(gulp.dest('./build'))
     .pipe(cssFilter.restore);
 });
