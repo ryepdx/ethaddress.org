@@ -1,4 +1,4 @@
-module.exports = function ($scope) {
+module.exports = ['$scope', function ($scope) {
     $scope.generateWallet = function () {
       var key = ethUtil.sha3($scope.walletPhrase);
       $scope.private = key.toString('hex');
@@ -22,4 +22,4 @@ module.exports = function ($scope) {
     $scope.exportKey = function () {
       saveAs(new Blob([$scope.private], {type: "text/plain;charset=utf-8"}), $scope.address + ".prv");
     };
-};
+}];

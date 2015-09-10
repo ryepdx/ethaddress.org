@@ -1,6 +1,6 @@
 var CryptoJS = require("crypto-js");
 
-module.exports = function ($scope) {
+module.exports = ['$scope', function ($scope) {
   var qr = new QrCode();
 
   $scope.scanningQR = false;
@@ -137,7 +137,7 @@ module.exports = function ($scope) {
   });
 
   $scope.print = function () {window.print();};
-};
+}];
 
 var EncryptedWallet = function (json) {
   this.data = json;

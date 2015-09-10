@@ -1,6 +1,6 @@
 var Accounts = require('ethereumjs-accounts');
 
-module.exports = function ($scope) {
+module.exports = ['$scope', function ($scope) {
     $scope.accounts = new Accounts({minPassphraseLength: 1});
     $scope.generateWallet = function () {
       var account = $scope.accounts.new($scope.password);
@@ -24,4 +24,4 @@ module.exports = function ($scope) {
       saveAs(new Blob([$scope.wallet.private], {type: "text/plain;charset=utf-8"}), $scope.wallet.address + ".prv");
     };
     $scope.generateWallet();
-};
+}];

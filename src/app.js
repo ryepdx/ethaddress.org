@@ -8,7 +8,8 @@ var app = angular.module('paperwallet', [
 var partials = require('./partials');
 var controllers = require('./controllers');
 
-app.config(function ($stateProvider, $urlRouterProvider) {
+app.config(['$stateProvider', '$urlRouterProvider',
+function ($stateProvider, $urlRouterProvider) {
   $urlRouterProvider.otherwise('/');
   $stateProvider
     .state('singleWallet', {
@@ -38,4 +39,4 @@ app.config(function ($stateProvider, $urlRouterProvider) {
     .state('about', {
       url: '/about', template: partials.about,
     });
-});
+}]);

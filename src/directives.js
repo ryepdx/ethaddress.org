@@ -1,5 +1,5 @@
 module.exports = function (app) {
-  app.directive('onClickSelectAll', function ($window) {
+  app.directive('onClickSelectAll', ['$window', function ($window) {
     return {
       link: function (scope, element) {
         element.on('click', function () {
@@ -11,7 +11,7 @@ module.exports = function (app) {
         });
       }
     };
-  })
+  }])
   .directive('cssImg', function () {
     return {
       restrict: 'E',
