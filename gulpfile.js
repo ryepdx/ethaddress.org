@@ -18,8 +18,8 @@ var getFileGlobs = function () {
 };
 var allFiles = getFileGlobs();
 
-gulp.task('watch', ['build'], function () {
-  gulp.watch(allFiles, ['build']);
+gulp.task('watch', ['build:dev'], function () {
+  gulp.watch(allFiles, ['build:dev']);
 });
 
 gulp.task('clean', function () {
@@ -75,6 +75,6 @@ gulp.task('concatjs', ['compile', 'browserify'], function () {
       .pipe(gulp.dest('./build'));
 });
 
-gulp.task('build', ['compile', 'browserify', 'concatjs', 'inlinesource']);
-
-gulp.task('default', ['build', 'watch']);
+gulp.task('build:prod', ['compile', 'browserify', 'concatjs', 'inlinesource']);
+gulp.task('build:dev', ['compile', 'browserify', 'concatjs']);
+gulp.task('default', ['build:prod']);
