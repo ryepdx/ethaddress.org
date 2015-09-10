@@ -1,8 +1,6 @@
 var gulp = require('gulp');
 var filter = require('gulp-filter');
 var concat = require('gulp-concat');
-var uglify = require('gulp-uglify');
-var minifyCSS = require('gulp-minify-css');
 var concatCSS = require('gulp-concat-css');
 var purifycss = require('gulp-purifycss');
 var inlinesource = require('gulp-inline-source');
@@ -19,8 +17,8 @@ var getFileGlobs = function () {
 };
 var allFiles = getFileGlobs();
 
-gulp.task('watch', ['build'], function () {
-  gulp.watch(allFiles, ['build']);
+gulp.task('watch', ['build:dev'], function () {
+  gulp.watch(allFiles, ['build:dev']);
 });
 
 gulp.task('clean', function () {
@@ -53,14 +51,13 @@ gulp.task('compile', ['clean'], function () {
     .pipe(inline_base64({baseDir: './'}))
     .pipe(concatCSS('all.css'))
     .pipe(purifycss(["./src/index.html", "./partials/*.html", "./build/bower.js"]))
-    .pipe(minifyCSS({semanticMerging: true}))
     .pipe(gulp.dest('./build'))
     .pipe(cssFilter.restore);
 });
 
-gulp.task('inlinesource', ['compile', 'browserify', 'uglify'], function () {
+gulp.task('inlinesource', ['compile', 'browserify', 'concatjs'], function () {
     return gulp.src('./src/index.html')
-        .pipe(inlinesource({compress: false, rootpath: __dirname}))
+        .pipe(inlinesource({rootpath: __dirname}))
         .pipe(gulp.dest('.'));
 });
 
@@ -70,13 +67,12 @@ gulp.task('browserify', ['clean', 'compile', 'hint'], function() {
       .pipe(gulp.dest('./build'));
 });
 
-gulp.task('uglify', ['compile', 'browserify'], function () {
+gulp.task('concatjs', ['compile', 'browserify'], function () {
     return gulp.src(['./build/bower.js', './build/npm.js'])
       .pipe(concat('all.js'))
-      .pipe(uglify({mangle: true}))
       .pipe(gulp.dest('./build'));
 });
 
-gulp.task('build', ['compile', 'browserify', 'uglify', 'inlinesource']);
-
-gulp.task('default', ['build', 'watch']);
+gulp.task('build:prod', ['compile', 'browserify', 'concatjs', 'inlinesource']);
+gulp.task('build:dev', ['compile', 'browserify', 'concatjs']);
+gulp.task('default', ['build:prod']);
