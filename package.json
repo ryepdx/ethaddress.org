@@ -24,7 +24,7 @@
   "homepage": "https://github.com/ryepdx/ethaddress.org#readme",
   "dependencies": {
     "crypto-js": "^3.1.5",
-    "ethereumjs-accounts": "0.0.11"
+    "ethereumjs-accounts": "https://github.com/tayzlor/ethereumjs-accounts.git#d206b50fa7cbc97db59177de38dbd93303a5eef6"
   },
   "devDependencies": {
     "brfs": "^1.4.1",

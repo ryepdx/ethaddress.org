@@ -36,7 +36,7 @@ gulp.task('compile', ['clean'], function () {
   allFiles = getFileGlobs();
   var jsFilter = filter('*.js', {restore: true});
   var cssFilter = filter('*.css', {restore: true});
-  var fontFilter = filter(['Roboto-Regular.woff'], {restore: true}); 
+  var fontFilter = filter(['Roboto-Regular.woff'], {restore: true});
 
   return gulp.src(allFiles)
     .pipe(fontFilter)
