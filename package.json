@@ -24,7 +24,7 @@
   "homepage": "https://github.com/ryepdx/ethaddress.org#readme",
   "dependencies": {
     "crypto-js": "^3.1.5",
-    "ethereumjs-accounts": "0.0.11"
+    "ethereumjs-accounts": "https://github.com/tayzlor/ethereumjs-accounts.git#d206b50fa7cbc97db59177de38dbd93303a5eef6"
   },
   "devDependencies": {
     "brfs": "^1.4.1",
@@ -40,6 +40,7 @@
     "gulp-purifycss": "^0.2.0",
     "gulp-replace": "^0.5.4",
     "gulp-rm": "^1.0.0",
+    "jshint-stylish": "^2.1.0",
     "main-bower-files": "^2.9.0",
     "vinyl-source-stream": "^1.1.0"
   },
