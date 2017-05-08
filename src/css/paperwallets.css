@@ -1,6 +1,10 @@
 .standalone.page-break { display: none; }
 .paperwallet, .paperwallet .art { width: 1010px; position: relative; margin: 0px; }
 
+.paperwallet .qrcode {
+    image-rendering: pixelated;
+}
+
 .paperwallet .art .address-qr,
 .paperwallet .art .privatekey-qr,
 .paperwallet .art .share-info-box,
